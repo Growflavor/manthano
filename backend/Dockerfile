@@ -3,7 +3,7 @@ FROM python:3.7.4
 RUN mkdir -p /manthano/server
 WORKDIR /manthano/server
 
-RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+RUN curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg
 RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" > /etc/apt/sources.list.d/PostgreSQL.list'
 RUN apt update
 RUN apt install postgresql-11 -y
